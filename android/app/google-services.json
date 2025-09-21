@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "944635405729",
+    "project_id": "vibra-beb69",
+    "storage_bucket": "vibra-beb69.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944635405729:android:5596a86c6abd388a0e17e0",
+        "android_client_info": {
+          "package_name": "com.alpha.vibra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944635405729-1vd98359a8tbkkop52dp97ujfl0lr86c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alpha.vibra",
+            "certificate_hash": "d094b73bcf290a2c0a903f1905b68ab05a98f6a1"
+          }
+        },
+        {
+          "client_id": "944635405729-ih9fjjgk7m2cug7lqjmkp43vr14oejr8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrdyESmuoPWrVO_WDrB3nZ20W1AEM3ZOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944635405729-ih9fjjgk7m2cug7lqjmkp43vr14oejr8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944635405729-rbhgc54amjd5b5ec7ufdf90njj8e1uo2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alpha.vibra"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

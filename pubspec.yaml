@@ -1,0 +1,55 @@
+name: vibra
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.10+1
+  flutter_bloc: ^9.1.1 # Using newer version from Vibra
+  bloc: ^9.0.0
+  get_it: ^8.2.0 # Using newer version from Vibra
+  google_fonts: ^6.3.1 # Using newer version from Vibra
+  flutter_chat_ui: ^2.9.0
+  firebase_core: ^3.1.1
+  firebase_auth: ^5.7.0
+  google_sign_in: ^6.3.0
+  cloud_firestore: ^5.0.2
+  equatable: ^2.0.5
+  rive: ^0.12.3 # Using newer version from Vibra
+  injectable: ^2.4.1 # Added from your instructions
+  font_awesome_flutter: ^10.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.9 # Added from your instructions
+  injectable_generator: ^2.6.1 # Added from your instructions
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    # - assets/avaters/
+    # - assets/Backgrounds/
+    # - assets/icons/
+    # - assets/RiveAssets/
+
+  # fonts:
+  #   - family: Intel
+  #     fonts:
+  #       - asset: assets/Fonts/Inter-Regular.ttf
+  #       - asset: assets/Fonts/Inter-SemiBold.ttf
+  #         weight: 600
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/Fonts/Poppins-Bold.ttf
+  #         weight: 700
