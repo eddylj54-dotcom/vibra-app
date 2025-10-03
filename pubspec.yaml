@@ -1,5 +1,5 @@
 name: vibra
-description: "A new Flutter project."
+description: "KymBta Live Stream Platform"
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -12,44 +12,54 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.10+1
-  flutter_bloc: ^9.1.1 # Using newer version from Vibra
-  bloc: ^9.0.0
-  get_it: ^8.2.0 # Using newer version from Vibra
-  google_fonts: ^6.3.1 # Using newer version from Vibra
+  flutter_bloc: ^8.1.5 # Using newer version from Vibra
+  bloc: ^8.1.4
+  get_it: ^7.7.0 # Using newer version from Vibra
+  google_fonts: ^6.2.1 # Using newer version from Vibra
   flutter_chat_ui: ^2.9.0
   firebase_core: ^3.1.1
   firebase_auth: ^5.7.0
   google_sign_in: ^6.3.0
   cloud_firestore: ^5.0.2
   equatable: ^2.0.5
-  rive: ^0.12.3 # Using newer version from Vibra
+  rive: ^0.13.4 # Using newer version from Vibra
   injectable: ^2.4.1 # Added from your instructions
   font_awesome_flutter: ^10.7.0
+  intl: ^0.19.0 # Added for date formatting
+  shared_preferences: ^2.5.3
+  url_launcher: ^6.3.2
+  package_info_plus: ^9.0.0
+  provider: ^6.1.5+1
+  image_picker: ^1.1.2
+  flutter_image_compress: ^2.3.0
+  cached_network_image: ^3.3.1
+  uuid: ^4.4.0
+  firebase_storage: ^12.4.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^4.0.0
   build_runner: ^2.4.9 # Added from your instructions
   injectable_generator: ^2.6.1 # Added from your instructions
+  mockito: ^5.4.4 # Added for mocking FirebaseAuth
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/images/
+    - assets/rive/
+    - assets/icons/ # Asegurarse de que los íconos SVG estén disponibles
     # - assets/avaters/
     # - assets/Backgrounds/
-    # - assets/icons/
     # - assets/RiveAssets/
 
-  # fonts:
-  #   - family: Intel
-  #     fonts:
-  #       - asset: assets/Fonts/Inter-Regular.ttf
-  #       - asset: assets/Fonts/Inter-SemiBold.ttf
-  #         weight: 600
-  #   - family: Poppins
-  #     fonts:
-  #       - asset: assets/Fonts/Poppins-Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/Fonts/Poppins-Bold.ttf
+          weight: 700
+    - family: Inter
+      fonts:
+        - asset: assets/Fonts/Inter-Regular.ttf

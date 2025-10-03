@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibra/features/auth/bloc/auth_bloc.dart';
-import 'package:vibra/features/auth/screens/login_screen.dart';
+import 'package:vibra/features/comments/pages/comments_page.dart'; // Importar CommentsPage
+import 'package:vibra/features/home/bloc/feed_bloc.dart';
+import 'package:vibra/features/home/repositories/post_repository.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,53 +12,62 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Vibra Feed'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              context.read<AuthBloc>().add(const SignOutRequested());
+              context.read<AuthBloc>().add(AuthLogoutRequested());
             },
           )
         ],
       ),
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is UnAuthenticated) {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-              (route) => false,
-            );
-          }
-        },
-        child: BlocBuilder<AuthBloc, AuthState>(
+      body: BlocProvider(
+        create: (context) => FeedBloc(
+          postRepository: RepositoryProvider.of<PostRepository>(context),
+        )..add(LoadFeed()),
+        child: BlocBuilder<FeedBloc, FeedState>(
           builder: (context, state) {
-            if (state is Authenticated) {
-              final user = state.user;
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (user.photoURL != null)
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(user.photoURL!),
-                      )
-                    else
-                      const CircleAvatar(
-                        radius: 50,
-                        child: Icon(Icons.person, size: 50),
+            if (state is FeedLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is FeedLoaded) {
+              if (state.posts.isEmpty) {
+                return const Center(
+                  child: Text('No hay publicaciones todavía. ¡Sé el primero!'),
+                );
+              }
+              return ListView.builder(
+                itemCount: state.posts.length,
+                itemBuilder: (context, index) {
+                  final postDoc = state.posts[index]; // Obtener el DocumentSnapshot
+                  final post = postDoc.data() as Map<String, dynamic>;
+                  final authorName = post['authorName'] ?? 'Anónimo';
+                  final content = post['content'] ?? '';
+
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CommentsPage(postId: postDoc.id), // Pasar el ID del post
+                        ),
+                      );
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      child: ListTile(
+                        title: Text(authorName, style: const TextStyle(fontWeight: FontWeight.bold)),
+                        subtitle: Text(content),
                       ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Welcome, ${(user.displayName?.split(' ').first) ?? 'User'}!',
-                      style: const TextStyle(fontSize: 24),
                     ),
-                  ],
-                ),
+                  );
+                },
               );
             }
-            return const Center(child: CircularProgressIndicator());
+            if (state is FeedError) {
+              return Center(child: Text('Error: ${state.message}'));
+            }
+            return const Center(child: Text('Iniciando feed...'));
           },
         ),
       ),

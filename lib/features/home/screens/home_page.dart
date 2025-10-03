@@ -13,35 +13,21 @@ class HomePage extends StatelessWidget {
     }
     final userPhotoUrl = user?.photoURL;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bienvenido a Vibra'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              // Con esto cerramos la sesión
-              FirebaseAuth.instance.signOut();
-            },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (userPhotoUrl != null)
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: NetworkImage(userPhotoUrl),
+            ),
+          const SizedBox(height: 20),
+          Text(
+            '¡Hola, $userName!',
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (userPhotoUrl != null)
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(userPhotoUrl),
-              ),
-            const SizedBox(height: 20),
-            Text(
-              '¡Hola, $userName!',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
       ),
     );
   }

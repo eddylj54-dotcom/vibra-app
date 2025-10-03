@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vibra/features/auth/bloc/auth_bloc.dart';
+import 'package:vibra/features/auth/screens/register_screen.dart'; // Import the new screen
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onPressed: () {
                     context.read<AuthBloc>().add(
-                          SignInRequested(
+                          AuthLoginWithEmailPasswordRequested( // FIX: Use correct event
                             email: _emailController.text,
                             password: _passwordController.text,
                           ),
@@ -88,12 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () {
-                    context.read<AuthBloc>().add(
-                          SignUpRequested(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          ),
-                        );
+                    // FIX: Navigate to RegisterScreen
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
+                    );
                   },
                   child: const Text(
                     'Register',
@@ -111,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   onPressed: () {
-                    context.read<AuthBloc>().add(const SignInWithGoogleRequested());
+                    // FIX: Use correct event
+                    context.read<AuthBloc>().add(const AuthLoginWithGoogleRequested());
                   },
                 ),
                 const SizedBox(height: 24),

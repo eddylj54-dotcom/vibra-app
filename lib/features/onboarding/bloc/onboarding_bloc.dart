@@ -16,7 +16,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     required DatabaseRepository databaseRepository,
   })  : _authRepository = authRepository,
         _databaseRepository = databaseRepository,
-        super(OnboardingNameInput()) {
+        super(const OnboardingNameInput()) {
     on<OnboardingNameSubmitted>((event, emit) async {
       final user = _authRepository.currentUser;
       if (user == null) {

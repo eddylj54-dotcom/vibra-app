@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibra/features/auth/bloc/auth_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = (context.read<AuthBloc>().state as Authenticated).user;
+    // FORMA SEGURA DE ACCEDER AL USUARIO
+    final state = context.read<AuthBloc>().state;
+    final user = state is Authenticated ? state.user : null;
+
+    // FORMA SEGURA DE OBTENER EL PRIMER NOMBRE
+    final firstName = user?.displayName?.split(' ').first ?? 'Usuario';
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vibra Home'),
+        title: const Text('Bienvenido a Vibra'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -25,28 +30,22 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (user.photoURL != null)
+            // FORMA SEGURA DE MOSTRAR LA FOTO DE PERFIL
+            if (user?.photoURL != null)
               CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage(user.photoURL!),
+                backgroundImage: NetworkImage(user!.photoURL!),
               )
             else
+              // Muestra un ícono por defecto si no hay foto
               const CircleAvatar(
                 radius: 50,
-                child: Icon(Icons.person, size: 50), // Placeholder if no photo
+                child: Icon(Icons.person, size: 50),
               ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Text(
-              '¡Bienvenido, ${user.displayName ?? user.email ?? 'Usuario'}!',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(AuthLogoutRequested());
-              },
-              child: const Text('Cerrar Sesión'),
+              'Hola, $firstName!',
+              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
           ],
         ),

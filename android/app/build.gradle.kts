@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.vibra"
+    namespace = "app.rork.kymbta_live_stream_platform"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

@@ -18,6 +18,16 @@ class AuthRepository {
     await _googleSignIn.signOut(); // Also sign out from Google
   }
 
+  Future<void> updateUserProfile(String newName, {String? newPhotoUrl}) async {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) {
+      throw Exception("No user is currently signed in.");
+    }
+    await user.updateProfile(displayName: newName, photoURL: newPhotoUrl);
+    // Opcional: Recargar el usuario para obtener los datos más recientes
+    await user.reload();
+  }
+
   // Method for Google Sign-In
   Future<UserCredential> signInWithGoogle() async {
     // Begin interactive sign-in process

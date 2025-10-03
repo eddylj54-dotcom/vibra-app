@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:vibra/features/database/models/user_model.dart';
 
 class DatabaseRepository {
@@ -8,7 +9,8 @@ class DatabaseRepository {
     try {
       await _db.collection('users').doc(user.uid).set(user.toJson());
     } catch (e) {
-      print('Error guardando datos de usuario: $e');
+      // Reemplazar print con un manejo de errores más robusto si es necesario
+      debugPrint('Error guardando datos de usuario: $e');
       rethrow;
     }
   }
@@ -21,7 +23,7 @@ class DatabaseRepository {
       }
       return null;
     } catch (e) {
-      print('Error obteniendo datos de usuario: $e');
+      debugPrint('Error obteniendo datos de usuario: $e');
       return null;
     }
   }
@@ -36,7 +38,7 @@ class DatabaseRepository {
         await _db.collection('users').doc(uid).update(data);
       }
     } catch (e) {
-      print('Error actualizando datos de usuario: $e');
+      debugPrint('Error actualizando datos de usuario: $e');
       rethrow;
     }
   }
